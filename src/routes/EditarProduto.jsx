@@ -1,8 +1,8 @@
-export default function EditarProduto(){
-
-    return(
-        <main>
-            <h1>Editando os Produtos</h1>
-        </main>
+export default function EditarProdutos() {
+    return (
+      <div>
+          <h1>EditarProdutos</h1>
+      </div>
     )
-}
+  }
+  
