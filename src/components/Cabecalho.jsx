@@ -13,7 +13,7 @@ export default function Cabecalho() {
             <Link to="/produtos">PRODUTOS</Link>
           </li>
           <li>
-            <Link to="/editar/produtos/1">PRODUTO-1</Link>
+          <Link to="/editar/produtos/1">PRODUTO-1</Link>
           </li>
         </ul>
       </header>
