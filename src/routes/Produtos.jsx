@@ -8,36 +8,28 @@ export default function Produtos() {
 
     document.title = "Lista de Produtos";
 
-    const [exemplo, setExemplo] = useState([{}]);
-
-    const [count, setCount] = useState(0);
+    const [listaProdutoLocal, setListaProdutoLocal] = useState([{}])
 
     useEffect(()=>{
-      console.log("Use-Effect que será sempre renderizado!");
-    });
 
-    useEffect(()=>{
-      console.log("Use-Effect que será renderizado apenas 1 vez!");
+        fetch('http://localhost:5000/produtos',{
 
-        setExemplo(ListaProdutos);
-
+          method: 'GET',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+        }).then((response)=> response.json())
+        .then((data)=>{
+            setListaProdutoLocal(data);
+        })
+        .catch((err)=>console.log(err));
+      
     },[]);
-
-    useEffect(()=>{
-      console.log("Use-Effect que será renderizado o objeto ou componente ou elemento que está no array de depenências sofrer atualização.");
-    },[count]);
-
-
-
 
     return (
       <div>
           <h1>LISTA DE PRODUTOS</h1>
 
-
-        <div>
-          <button onClick={()=> setCount(count + 1)}>COUNTER - {count}</button>
-        </div>
 
         <div>
           <table className={classes.tableStyle}>
@@ -52,7 +44,7 @@ export default function Produtos() {
                 </tr>
             </thead>
             <tbody>
-              {exemplo.map((produto, index) => (
+              {listaProdutoLocal.map((produto, index) => (
                 <tr key={index} className={classes.tableLineStyle}>
                   <td className={classes.tableDataStyle}>{produto.id}</td>
                   <td className={classes.tableDataStyle}>{produto.nome}</td>
@@ -74,4 +66,20 @@ export default function Produtos() {
       </div>
     )
   }
+
   
+//   <div>
+//   <button onClick={()=> setCount(count + 1)}>COUNTER - {count}</button>
+// </div>
+
+  
+  // const [exemplo, setExemplo] = useState([{}]);
+  // const [count, setCount] = useState(0);
+
+  // useEffect(()=>{
+  //   console.log("Use-Effect que será sempre renderizado!");
+  // });
+  
+  // useEffect(()=>{
+  //   console.log("Use-Effect que será renderizado o objeto ou componente ou elemento que está no array de depenências sofrer atualização.");
+  // },[count]);
