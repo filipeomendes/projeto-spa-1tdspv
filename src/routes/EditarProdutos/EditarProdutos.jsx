@@ -1,7 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import { ListaProdutos } from '../../components/ListaProdutos'
-import { useState } from 'react'
-import "./EditarProdutos.scss";
+import { useState, useEffect } from 'react'
 
 export default function EditarProdutos() {
   //Utilizar o HOOK useParams() para recuperar o ID passado no path
@@ -11,16 +9,21 @@ export default function EditarProdutos() {
 
   const navigate = useNavigate()
 
-  const produtoRetornadoDoFiltro = ListaProdutos.filter((produto) => produto.id == id)[0]
+  const [produto, setProduto] = useState({})
 
-  //useState()
-  const [produto, setProduto] = useState({
-    id: produtoRetornadoDoFiltro.id,
-    nome: produtoRetornadoDoFiltro.nome,
-    desc: produtoRetornadoDoFiltro.desc,
-    preco: produtoRetornadoDoFiltro.preco,
-    img: produtoRetornadoDoFiltro.img
-  })
+  useEffect(() => {
+    fetch(`http://localhost:5000/produtos/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProduto(data)
+      })
+      .catch((error) => console.log(error))
+  }, [])
 
   const handleChange = (event) => {
     //Destructuring

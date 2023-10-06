@@ -2,7 +2,7 @@
   "produtos": [
     {
       "id": 1,
-      "nome": "Teclado Mecanico",
+      "nome": "Teclado Gamer",
       "desc": "Teclado 102 Teclas - Mecânico.",
       "preco": 200,
       "img": "https://picsum.photos/100/100"
